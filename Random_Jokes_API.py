@@ -16,3 +16,4 @@ if __name__ == "__main__":
     print("=== Random joke API ===")
     print(get_random_joke())
     print("\n😂😂😂😂:")
+    

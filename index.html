@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Chiste Aleatorio</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        #joke { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <h1>😂 Chiste de Programación 😂</h1>
+    <button onclick="getJoke()">Obtener Chiste</button>
+    <div id="joke">Haz clic para iniciar...</div>
+
+    <script>
+        async function getJoke() {
+            try {
+                const res = await fetch("https://v2.jokeapi.dev/joke/Programming?lang=es");
+                const data = await res.json();
+
+                let jokeText = "";
+                if (data.type === "single") {
+                    jokeText = data.joke;
+                } else {
+                    jokeText = `${data.setup}... ${data.delivery}`;
+                }
+
+                document.getElementById("joke").textContent = jokeText;
+            } catch (err) {
+                document.getElementById("joke").textContent = "Error, try again.";
+            }
+            
+        }   
+    </script>
+</body>
+</html>
