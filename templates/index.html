@@ -11,29 +11,21 @@
 </head>
 <body>
 
-    <h1>😂 Chiste de Programación 😂</h1>
+    <h1>😂 Chiste de Programación</h1>
     <button onclick="getJoke()">Obtener Chiste</button>
-    <div id="joke">Haz clic para iniciar...</div>
+    <div id="joke">Haz clic para ver un chiste...</div>
 
     <script>
         async function getJoke() {
             try {
-                const res = await fetch("https://v2.jokeapi.dev/joke/Programming?lang=es");
+                const res = await fetch("/joke");
                 const data = await res.json();
-
-                let jokeText = "";
-                if (data.type === "single") {
-                    jokeText = data.joke;
-                } else {
-                    jokeText = `${data.setup}... ${data.delivery}`;
-                }
-
-                document.getElementById("joke").textContent = jokeText;
+                document.getElementById("joke").textContent = data.joke || data.error;
             } catch (err) {
                 document.getElementById("joke").textContent = "Error, try again.";
             }
-            
-        }   
+        }
     </script>
+
 </body>
 </html>
